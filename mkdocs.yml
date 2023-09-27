@@ -1,0 +1,13 @@
+site_name: GPTStonks Chatbot
+repo_url: https://github.com/gptstonks/gptstonks.github.io/
+site_url: https://gptstonks.github.io/
+repo_name: GPTStonks Chatbot
+docs_dir: docs
+nav:
+  - Overview: index.md
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: teal
+    accent: purple
