@@ -5,7 +5,10 @@
 A sleek and modern chatbot that helps retail investors access financial data to make better-informed decisions.
 
 <div align="center">
-   <img src="./resources/demo.gif" width="80%" />
+   <video width="100%" controls>
+  <source src="./resources/demo.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
 </div>
 
 ## Description
