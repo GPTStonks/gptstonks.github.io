@@ -4,7 +4,9 @@
 
 A sleek and modern chatbot that helps retail investors access financial data to make better-informed decisions.
 
-![](./resources/demo.gif)
+<div align="center">
+   <img src="./resources/demo.gif" width="80%" />
+</div>
 
 ## Description
 
