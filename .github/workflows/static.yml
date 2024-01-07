@@ -41,6 +41,7 @@ jobs:
         run: |
           pip install mkdocs
           pip install mkdocs-material
+          pip install mkdocs-minify-plugin
 
       - name: Build docs in site/
         run: |
