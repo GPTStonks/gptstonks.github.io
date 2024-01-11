@@ -1,12 +1,12 @@
 <p align="center">
-  <img src="./resources/logo-chatbot.png" alt="Logo">
+  <img src="assets/logo-chatbot.png" alt="Logo">
 </p>
 
 A sleek and modern chatbot that helps retail investors access financial data to make better-informed decisions.
 
 <div align="center">
    <video width="100%" controls>
-  <source src="./resources/demo.mp4" type="video/mp4">
+  <source src="assets/demo.mp4" type="video/mp4">
 Your browser does not support the video tag.
 </video>
 </div>

@@ -40,8 +40,9 @@ jobs:
       - name: Install dependencies
         run: |
           pip install mkdocs
-          pip install mkdocs-material
+          pip install "mkdocs-material[imaging]"
           pip install mkdocs-minify-plugin
+          pip install mkdocs-git-revision-date-localized-plugin
 
       - name: Build docs in site/
         run: |
