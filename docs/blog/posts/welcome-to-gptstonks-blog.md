@@ -22,7 +22,7 @@ categories:
 [![GitHub Repo](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/GPTStonks)
 [![Docker](https://img.shields.io/badge/Docker_Hub-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://hub.docker.com/u/gptstonks)
 
-Hey there, you **diamond-handed legends! 🚀🦍**
+Hey there, you **diamond-handed legends! 🚀💰**
 
 Welcome to the **GPTStonks blog**—where we're diving into the **financial deep end** armed with **data, insights, and some serious AI mojo**. This ain't your standard chatbot; it's a tool that's all about **crunching numbers, fetching the latest news**, and dropping **wisdom bombs** to help you make those **big-league decisions**.
 
@@ -45,5 +45,5 @@ So, **grab your calculators, sharpen those pencils**, and let's dive headfirst i
   </video>
 </div>
 <p align=center>
-<b>Video 1:</b> Preview of GPTStonks Chat from months ago. New revamped release coming soon!
+<b>Video 1:</b> Preview of GPTStonks Chat Community Edition (CE) months ago. New release coming soon!
 </p>
