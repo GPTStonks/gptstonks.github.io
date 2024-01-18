@@ -1,7 +1,7 @@
-site_name: GPTStonks Chatbot
+site_name: GPTStonks Chat
 repo_url: https://github.com/gptstonks/
 site_url: https://gptstonks.github.io/
-repo_name: GPTStonks Chatbot
+repo_name: GPTStonks Chat
 docs_dir: docs
 copyright: Copyright &copy; 2023 - 2024 Mitheithel, S.L.
 nav:
@@ -24,9 +24,9 @@ theme:
     # - navigation.expand
     - navigation.footer
     - navigation.indexes
-    # - navigation.instant
+    - navigation.instant
     # - navigation.instant.prefetch
-    # - navigation.instant.progress
+    - navigation.instant.progress
     # - navigation.prune
     - navigation.sections
     - navigation.tabs
@@ -45,21 +45,21 @@ theme:
         name: Switch to light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: indigo
-      accent: indigo
+      primary: black
+      accent: amber
       toggle:
         icon: material/toggle-switch
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       primary: black
-      accent: indigo
+      accent: amber
       toggle:
         icon: material/toggle-switch-off
         name: Switch to system preference
   font:
-    text: Roboto
-    code: Roboto Mono
+    text: Fira Sans
+    code: Fira Code
   favicon: assets/favicon.png
   icon:
     logo: logo
