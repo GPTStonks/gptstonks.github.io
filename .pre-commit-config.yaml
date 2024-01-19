@@ -12,15 +12,15 @@ repos:
       - id: check-case-conflict
 
   # md formatting
-  - repo: https://github.com/executablebooks/mdformat
-    rev: 0.7.16
-    hooks:
-      - id: mdformat
-        args: ["--number"]
-        additional_dependencies:
-          - mdformat-gfm
-          - mdformat-tables
-          - mdformat_frontmatter
+  # - repo: https://github.com/executablebooks/mdformat
+  #   rev: 0.7.16
+  #   hooks:
+  #     - id: mdformat
+  #       args: ["--number"]
+  #       additional_dependencies:
+  #         - mdformat-gfm
+  #         - mdformat-tables
+  #         - mdformat_frontmatter
           # - mdformat-toc
           # - mdformat-black
 

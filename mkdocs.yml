@@ -63,7 +63,6 @@ theme:
   favicon: assets/favicon.png
   icon:
     logo: logo
-    search: material/robot-happy
 plugins:
   - search:
       separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
@@ -108,6 +107,58 @@ markdown_extensions:
       generic: true
   - pymdownx.betterem:
       smart_enable: all
+  - pymdownx.blocks.admonition:
+      types:
+      - new
+      - settings
+      - note
+      - abstract
+      - info
+      - tip
+      - success
+      - question
+      - warning
+      - failure
+      - danger
+      - bug
+      - example
+      - quote
+  - pymdownx.blocks.details:
+      types:
+      - name: details-new
+        class: new
+      - name: details-settings
+        class: settings
+      - name: details-note
+        class: note
+      - name: details-abstract
+        class: abstract
+      - name: details-info
+        class: info
+      - name: details-tip
+        class: tip
+      - name: details-success
+        class: success
+      - name: details-question
+        class: question
+      - name: details-warning
+        class: warning
+      - name: details-failure
+        class: failure
+      - name: details-danger
+        class: danger
+      - name: details-bug
+        class: bug
+      - name: details-example
+        class: example
+      - name: details-quote
+        class: quote
+  - pymdownx.blocks.html:
+  - pymdownx.blocks.definition:
+  - pymdownx.blocks.tab:
+      alternate_style: True
+      combine_header_slug: True
+      slugify: !!python/object/apply:pymdownx.slugs.slugify {kwds: {case: lower}}
   - pymdownx.caret
   - pymdownx.details
   - pymdownx.emoji:
