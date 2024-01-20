@@ -50,7 +50,7 @@ GPTStonks Chat CE flaunts a microservice trio:
 
 ## Running GPTStonks Chat CE with Docker Compose
 
-Getting this trio up and running is a breeze with Docker Compose:
+Getting this trio up and running is a breeze with Docker Compose. Copy the following text to a file called `docker-compose.yaml`:
 
 ```yaml
 version: "3.8"
@@ -88,13 +88,13 @@ volumes:
 To install Docker Compose, follow the official [installation guide](https://docs.docker.com/compose/install/#installation-scenarios).
 ///
 
-In this tutorial, the selected model is [`Zephyr 7B Beta - GGUF`](https://huggingface.co/TheBloke/zephyr-7B-beta-GGUF). Download it with `huggingface-cli`:
+In this tutorial, the selected model is [`Zephyr 7B Beta - GGUF`](https://huggingface.co/TheBloke/zephyr-7B-beta-GGUF). Download it with `huggingface-cli` (`pip install huggingface-cli`):
 
 ```bash
 huggingface-cli download TheBloke/zephyr-7B-beta-GGUF zephyr-7b-beta.Q4_K_M.gguf --local-dir . --local-dir-use-symlinks False
 ```
 
-Once you've successfully downloaded the model, you'll want to mount it into `/api/gptstonks_api/zephyr-7b-beta.Q4_K_M.gguf`. This is crucial, as the environment variable `LLM_MODEL_ID` specified in `.env.template` references this path within the container. To achieve this, set the `LOCAL_LLM_PATH` to the local directory where the model is stored, like so:
+Once you've successfully downloaded the model, you'll want to mount it into `/api/gptstonks_api/zephyr-7b-beta.Q4_K_M.gguf`. This is crucial, as the environment variable `LLM_MODEL_ID` specified in `.env.template` references this path within the container. To achieve this, set the `LOCAL_LLM_PATH` to the local directory where the model is stored before running `docker compose up`, like so:
 
 ```bash
 LOCAL_LLM_PATH=path/to/downloaded/model/zephyr-7b-beta.Q4_K_M.gguf docker compose up
