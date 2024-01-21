@@ -48,11 +48,17 @@ GPTStonks Chat CE flaunts a microservice trio:
 - 🗃️ **Database:**
   Open-source MongoDB is readily available on [DockerHub](https://hub.docker.com/_/mongo), standing ready to manage essential provider tokens (PATs), presently focusing on OpenBB's.
 
-## Running GPTStonks Chat CE with Docker Compose
+## Running GPTStonks Chat CE with Docker Compose :whale:
 
-Getting this trio up and running is a breeze with Docker Compose. Copy the following text to a file called `docker-compose.yaml`:
+### Configuration :gear:
 
-```yaml
+/// details-tip | How to install Docker Compose
+To install Docker Compose, follow the official [installation guide](https://docs.docker.com/compose/install/#installation-scenarios).
+///
+
+Getting this trio up and running is a breeze with **Docker Compose**. Just head over to your local directory, create a new file called `docker-compose.yaml`, and include the following content:
+
+```yaml title="docker-compose.yaml"
 version: "3.8"
 
 services:
@@ -84,15 +90,30 @@ volumes:
   mongo-data:
 ```
 
-/// tip
-To install Docker Compose, follow the official [installation guide](https://docs.docker.com/compose/install/#installation-scenarios).
-///
+Furthermore, a brief script is necessary to initialize the database with the appropriate structure. To complete this task, create a file named `mongo-init.js` and include the provided code.
 
-In this tutorial, the selected model is [`Zephyr 7B Beta - GGUF`](https://huggingface.co/TheBloke/zephyr-7B-beta-GGUF). Download it with `huggingface-cli` (`pip install huggingface-cli`):
+```js title="mongo-init.js"
+db = db.getSiblingDB('mongodb');
+
+db.tokens.insertOne({
+    description: "Initial document"
+});
+```
+
+### Large language model selection :brain:
+
+In this tutorial, the selected model is [`Zephyr 7B Beta - GGUF`](https://huggingface.co/TheBloke/zephyr-7B-beta-GGUF). Download it with `huggingface-cli`:
 
 ```bash
 huggingface-cli download TheBloke/zephyr-7B-beta-GGUF zephyr-7b-beta.Q4_K_M.gguf --local-dir . --local-dir-use-symlinks False
 ```
+
+/// details-info | How to install `huggingface-cli`
+`huggingface-cli` can be installed in your Python environment using `pip`:
+```bash
+pip install huggingface-cli
+```
+///
 
 Once you've successfully downloaded the model, you'll want to mount it into `/api/gptstonks_api/zephyr-7b-beta.Q4_K_M.gguf`. This is crucial, as the environment variable `LLM_MODEL_ID` specified in `.env.template` references this path within the container. To achieve this, set the `LOCAL_LLM_PATH` to the local directory where the model is stored before running `docker compose up`, like so:
 
@@ -100,7 +121,7 @@ Once you've successfully downloaded the model, you'll want to mount it into `/ap
 LOCAL_LLM_PATH=path/to/downloaded/model/zephyr-7b-beta.Q4_K_M.gguf docker compose up
 ```
 
-/// settings
+/// details-settings | Using a different model
 Considering a different model? No worries – it's as easy as adjusting the `LLM_MODEL_ID` in the `.env.template` file to the name of your preferred model. After that, a simple command:
 
 ```bash
@@ -113,6 +134,8 @@ If you're leaning towards using closed LLMs, like **OpenAI**, the process is **s
 
 A quick heads-up: different models may perform best with specific prompt structures. Keep that in mind for optimal results! 👍💻
 ///
+
+### Starting GPTStonks Chat CE
 
 When Docker Compose is initiated using the command `docker compose up`, it takes a few minutes to download all the necessary images. After this process is complete, the environment automatically starts. Upon observing the message:
 
@@ -128,7 +151,7 @@ as provided by the API in the Docker Compose output, you can access GPTStonks Ch
 🌟 Congratulations! You've got GPTStonks Chat CE running on your PC. 🌟
 ///
 
-## Chatting with GPTStonks CE: Let the Fun Begin! 🎉
+## Chatting with GPTStonks Chat CE: Let the Fun Begin! 🎉
 
 Now for the fun part! Head over to `localhost:3000` and witness the magic. Throw any financial query at it, and let the chatbot impress you. Here's a peek when asked about Nvidia's latest news:
 
@@ -150,7 +173,7 @@ Awesome! The data comes back in the form of a handy table that we can effortless
 
 It's a seamless experience, **making financial data analysis a breeze**!
 
-/// info
+/// details-note | Benefits of using tables, candle charts and downloaded data
 Having financial data presented in tables, candle charts, and JSON or Excel format offers several distinct benefits, each catering to specific aspects of analysis:
 
 1. **Tables:**
@@ -177,9 +200,9 @@ Having financial data presented in tables, candle charts, and JSON or Excel form
 
 As we delve into the realm of open-source and local CPU RAM, here are a few considerations:
 
-- ⚡ Speed is contingent on model size and hardware. The inclusion of GPUs, utilization of smaller models, or external providers such as OpenAI can enhance both accuracy and speed.
+- ⚡ **Speed is contingent on model size and hardware**. The inclusion of GPUs, utilization of smaller models, or external providers such as OpenAI can enhance both accuracy and speed.
 - 💡 Zephyr 7B Beta - GGUF requires approximately 7GB of CPU RAM.
-- 🤖 Effective prompting is essential for optimal performance. Check out our `.env.template` for prompts inspired by [OpenAI's guide](https://platform.openai.com/docs/guides/prompt-engineering?ref=upstract.com).
+- 🤖 **Effective prompting** is essential for **optimal performance**. Check out our `.env.template` for prompts inspired by [OpenAI's guide](https://platform.openai.com/docs/guides/prompt-engineering?ref=upstract.com).
 
 Time to explore, analyze, and thrive! 🚀✨
 
