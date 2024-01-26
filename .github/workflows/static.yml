@@ -43,6 +43,7 @@ jobs:
           pip install "mkdocs-material[imaging]"
           pip install mkdocs-minify-plugin
           pip install mkdocs-git-revision-date-localized-plugin
+          pip install mkdocs-rss-plugin
 
       - name: Build docs in site/
         run: |

@@ -1,7 +1,7 @@
 ---
 title: How to run GPTStonks Chat Community Edition (CE) on a personal computer
 date: 2024-01-10
-authors: [daedalus, bytebard]
+authors: [bytebard]
 slug: run-gptstonks-locally
 description: >
   Learn how to run GPTStonks Chat CE (Community Edition) on your own personal computer
@@ -10,6 +10,7 @@ description: >
   be run on consumer hardware even without GPUs. An example is provided with Zephyr-7B.
 categories:
   - Tutorial
+comments: true
 ---
 
 # 🚀 Running GPTStonks Chat Community Edition (CE) on Your Personal Computer
@@ -195,6 +196,10 @@ Having financial data presented in tables, candle charts, and JSON or Excel form
     - **Graphical Representations:** Excel's charting capabilities allow for the creation of various charts and graphs, enhancing visual representation for better interpretation.
 
 ///
+
+## Seeking simplicity? Give GPTStonks Chat web a try!
+
+We're thrilled to share that our web service is on the horizon. Forget about hardware or configurations—immerse yourself in refining your investments with top-notch information. If you're eager to get started, be sure to join the [beta waitlist](https://gptstonks.net/joinwaitlist). Stay tuned for more updates on this exciting development!
 
 ## 🚨 Important Remarks
 

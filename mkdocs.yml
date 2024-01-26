@@ -10,6 +10,7 @@ nav:
     - blog/index.md
 theme:
   name: material
+  custom_dir: overrides
   logo: assets/favicon.png
   features:
     - announce.dismiss
@@ -71,7 +72,19 @@ plugins:
       minify_html: true
   - git-revision-date-localized
   - social
-  - privacy
+  - privacy:
+      assets: false
+  - rss:
+      match_path: blog/posts/.*
+      date_from_meta:
+        as_creation: date
+      categories:
+        - categories
+        - tags
+      enabled: true
+      image: https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Feed-icon.svg/128px-Feed-icon.svg.png
+      json_feed_enabled: true
+      use_material_social_cards: true
 
 # Additional configuration
 extra:
