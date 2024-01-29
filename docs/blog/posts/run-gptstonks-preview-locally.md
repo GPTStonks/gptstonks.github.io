@@ -54,16 +54,22 @@ GPTStonks Chat CE flaunts a microservice trio:
 
 ### Configuration :gear:
 
-/// details-info | How to install Docker Compose
-To install Docker Compose, follow the official [installation guide](https://docs.docker.com/compose/install/#installation-scenarios).
-///
+#### Preferred way: cloning with git
 
-/// details-tip | Downloading configuration files with git
 If you already have `git` installed, you can obtain the configuration files by cloning GPTStonks' API repository:
 ```bash
 git clone https://github.com/GPTStonks/api.git && cd api
 ```
 After that, proceed to [Large language model selection :brain:](#large-language-model-selection).
+
+#### Alternative way: creating the configuration files
+
+/// details-info | How to install Docker Compose
+To install Docker Compose, follow the official [installation guide](https://docs.docker.com/compose/install/#installation-scenarios).
+///
+
+/// details-tip | Downloading configuration files with git
+
 ///
 
 Getting this trio up and running is a breeze with **Docker Compose**. Just head over to your local directory, create a new file called `docker-compose.yaml`, and include the following content:
@@ -77,9 +83,9 @@ services:
     ports:
       - "8000:8000"
     env_file:
-      - .env.template
+      - .env.template # env variables to customize GPTStonks Chat CE (required)
     volumes:
-      - ${LOCAL_LLM_PATH}:/api/gptstonks_api/zephyr-7b-beta.Q4_K_M.gguf
+      - ${LOCAL_LLM_PATH}:/api/gptstonks_api/zephyr-7b-beta.Q4_K_M.gguf # LLM (required)
 
   frontend:
     image: gptstonks/front-end:latest
@@ -94,7 +100,7 @@ services:
       - MONGO_INITDB_DATABASE=mongodb
     volumes:
       - mongo-data:/data/db
-      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro # MongoDB initialization script (required)
 
 volumes:
   mongo-data:
@@ -108,6 +114,60 @@ db = db.getSiblingDB('mongodb');
 db.tokens.insertOne({
     description: "Initial document"
 });
+```
+
+Finally, you'll need to set up some environment variables to customize GPTStonks Chat CE. To do this with the Docker Compose provided earlier, simply store these variables in a file named `.env.template`. Here's an example for reference:
+
+```bash title=".env.template"
+# Uncomment to run with debugging
+DEBUG_API=1
+
+# ID of the embedding model to use
+AUTOLLAMAINDEX_EMBEDDING_MODEL_ID="local:BAAI/bge-base-en-v1.5"
+
+# LLM to use. Format provider:model_id, where model_id is dependent on the provider.
+# Example provided with local LLM using llama.cpp.
+# Model downloaded from https://huggingface.co/TheBloke/zephyr-7B-beta-GGUF.
+LLM_MODEL_ID="llamacpp:./gptstonks_api/zephyr-7b-beta.Q4_K_M.gguf"
+
+# Context window when using llama.cpp models
+LLM_LLAMACPP_CONTEXT_WINDOW=8000
+AUTOLLAMAINDEX_LLM_CONTEXT_WINDOW=8000
+
+# Randomness in the sampling of the posterior of the LLM
+# 0 - greedy sampling, 1 - posterior without modification
+LLM_TEMPERATURE=0
+
+# Max tokens to sample from LLM
+LLM_MAX_TOKENS=512
+
+# Description of the OpenBB chat tool
+OPENBBCHAT_TOOL_DESCRIPTION="useful to get financial and investing data. Input should be the concrete data to retrieve, in natural language."
+
+# Path to the Vector Store Index (VSI).
+# Download from https://github.com/GPTStonks/api/tree/0.0.1/gptstonks_api/data/openbb_v4.1.0_historical_vectorstoreindex_bgebaseen and copy to local dir ./gptstonks_api/data/openbb_v4.1.0_historical_vectorstoreindex_bgebaseen
+AUTOLLAMAINDEX_VSI_PATH="vsi:./gptstonks_api/data/openbb_v4.1.0_historical_vectorstoreindex_bgebaseen"
+
+# Includes the model format
+CUSTOM_GPTSTONKS_PREFIX="<|system|>\n</s>\n<|user|>\nYou are a helpful and useful financial assistant.\n\nTOOLS:\n------\n\nYou have access to the following tools:"
+
+# Memory is removed by default
+CUSTOM_GPTSTONKS_SUFFIX="Begin! New input: {input} {agent_scratchpad}</s>\n<|assistant|>"
+
+# Includes the model format in the default QA template
+CUSTOM_GPTSTONKS_QA="<|system|>\n</s>\n<|user|>\nContext information is below.\n---------------------\n{context_str}\n---------------------\nGiven the context information and not prior knowledge, answer the query.\nQuery: {query_str}\nAnswer:</s>\n<|assistant|>"
+
+# Template for the QA (Question-Answer) format
+AUTOLLAMAINDEX_QA_TEMPLATE="<|system|>\n</s>\n<|user|>\nYou must write Python code to solve the query '{query_str}'. You must use only one of the functions below and store its output in a variable called `res`.\n---------------------\n{context_str}\n---------------------\nWrite the Python code between '```python' and '```', using only one of the functions above. Do not use `print`.</s>\n<|assistant|>"
+
+# Disable hybrid retriever, only vector search
+AUTOLLAMAINDEX_NOT_USE_HYBRID_RETRIEVER=1
+
+# MongoDB URI
+MONGO_URI=mongodb://mongo:27017
+
+# MongoDB database name
+MONGO_DBNAME=mongodb
 ```
 
 ### Large language model selection :brain:
