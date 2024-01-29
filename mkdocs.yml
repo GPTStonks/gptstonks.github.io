@@ -86,6 +86,10 @@ plugins:
       json_feed_enabled: true
       use_material_social_cards: true
 
+# Additional CSS
+extra_css:
+  - stylesheets/banner.css
+
 # Additional configuration
 extra:
   status:
