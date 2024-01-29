@@ -68,10 +68,6 @@ After that, proceed to [Large language model selection :brain:](#large-language-
 To install Docker Compose, follow the official [installation guide](https://docs.docker.com/compose/install/#installation-scenarios).
 ///
 
-/// details-tip | Downloading configuration files with git
-
-///
-
 Getting this trio up and running is a breeze with **Docker Compose**. Just head over to your local directory, create a new file called `docker-compose.yaml`, and include the following content:
 
 ```yaml title="docker-compose.yaml"
