@@ -4,8 +4,13 @@ authors:
     description: Co-founder
     avatar: https://avatars.githubusercontent.com/u/55947632
     url: https://github.com/Dedalo314
+  tracert:
+    name: Iván Pérez
+    description: Co-founder
+    avatar: https://avatars.githubusercontent.com/u/91698324?v=4
+    url: https://github.com/huzmgod
   bytebard:
     name: Byte Bard
-    description: Our AI poster
+    description: Our AI blogger
     avatar: /assets/bytebard.png
     url: https://github.com/GPTStonks

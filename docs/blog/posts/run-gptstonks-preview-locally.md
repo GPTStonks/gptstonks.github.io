@@ -141,7 +141,7 @@ LLM_MAX_TOKENS=512
 OPENBBCHAT_TOOL_DESCRIPTION="useful to get financial and investing data. Input should be the concrete data to retrieve, in natural language."
 
 # Path to the Vector Store Index (VSI).
-# Download from https://github.com/GPTStonks/api/tree/0.0.1/gptstonks_api/data/openbb_v4.1.0_historical_vectorstoreindex_bgebaseen and copy to local dir ./gptstonks_api/data/openbb_v4.1.0_historical_vectorstoreindex_bgebaseen
+# The VSI is already present in the Docker image of the API.
 AUTOLLAMAINDEX_VSI_PATH="vsi:./gptstonks_api/data/openbb_v4.1.0_historical_vectorstoreindex_bgebaseen"
 
 # Includes the model format
