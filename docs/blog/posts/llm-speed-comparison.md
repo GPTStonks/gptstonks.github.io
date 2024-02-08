@@ -23,6 +23,22 @@ Hey finance and AI enthusiasts! :dollar: :brain: Embarking on the journey of Lar
 
 <!-- more -->
 
+/// tip | TL;DR
+
+This blog post explores how the selection of Large Language Model (LLM) inference frameworks can impact inference time on consumer hardware, focusing on four prominent frameworks: **Llama.cpp's GGUF**, **GPTQ** (with Hugging Face's LLMs), **OpenAI API**, and **AWS Bedrock**. It delves into the **quantization strategies** employed by each framework, discussing their **pros and cons** and providing **benchmark results**. Llama.cpp's GGUF is highlighted for its lightweight quantization techniques, making it ideal for resource-constrained environments over CPU, although it has limited availability of pre-trained models. On the other hand, GPTQ with Hugging Face's LLMs benefits from a vast repository of pre-trained models and a robust community but may require GPUs and higher resource requirements for some models. Additionally, the post briefly touches on OpenAI API's access to advanced language models and its wide range of applications. Overall, the post aims to **empower finance and AI enthusiasts** in **making informed decisions** when selecting LLM inference frameworks for their applications.
+
+/// example | Best configuration in most use cases (OpenAI API)
+Add the following to your env variables (by default in `.env.template`):
+```bash title=".env.template"
+...
+LLM_MODEL_ID=openai:gpt-3.5-turbo-1106 # See https://platform.openai.com/docs/models
+OPENAI_API_KEY=sk-...XXXX # Your OpenAI API key
+...
+```
+///
+
+///
+
 ## Introduction
 
 Large Language Models (LLMs) have emerged as powerful tools in natural language processing, significantly impacting applications in finance and AI. Selecting the right inference framework is pivotal to strike a balance between accuracy and speed. In this guide, we'll delve into four prominent LLM inference frameworks: **Llama.cpp's GGUF**, **GPTQ**, **OpenAI API**, and **AWS Bedrock**. We'll explore fundamental concepts, delve into explicit pros and cons, and provide benchmark results to empower you in making informed decisions.
@@ -45,6 +61,15 @@ The **file structure** of GGUF is **meticulously defined**, specifying the globa
 
 The standardized key-value pairs in GGUF include essential metadata like architecture type, quantization version, and alignment. Additionally, there are architecture-specific metadata for **LLaMA, MPT, GPT-NeoX, GPT-J, GPT-2, Bloom, Falcon, RWKV, Whisper, LoRA,** and **Tokenizer**. The specification also discusses the future extension of GGUF to include a computation graph, enabling executors to run models without their implementations of the architecture, and the use of a standardized naming convention for tensor names.
 
+/// success | Pros
+- Utilizes lightweight quantization techniques for efficient inference.
+- Ideal for resource-constrained environments.
+///
+
+/// danger | Cons
+- Limited availability of pre-trained models compared to other frameworks.
+///
+
 /// example | How to use it in GPTStonks Chat CE
 Download the model using `huggingface-cli` and include the following to your env variables (by default in `.env.template`):
 ```bash title=".env.template"
@@ -53,15 +78,6 @@ LLM_MODEL_ID=llamacpp:<PATH TO DOWNLOADED MODEL>
 ...
 ```
 If you are using a Docker container, the model must be mounted as a volume in the container to make it accessible to the API.
-///
-
-/// success | Pros
-- Utilizes lightweight quantization techniques for efficient inference.
-- Ideal for resource-constrained environments.
-///
-
-/// danger | Cons
-- Limited availability of pre-trained models compared to other frameworks.
 ///
 
 ### GPTQ (with Hugging Face's LLMs)
@@ -92,6 +108,15 @@ The main contributions and findings of the paper include:
 
 The authors acknowledge some limitations, such as the lack of speedups for actual multiplications due to the absence of hardware support for mixed-precision operands and the exclusion of activation quantization in the current results. Despite these limitations, the paper encourages further research in this area and aims to contribute to making large language models more accessible.
 
+/// success | Pros
+- Hugging Face offers a vast repository of pre-trained models, catering to diverse requirements.
+- Benefits from a robust community with frequent updates.
+///
+
+/// danger | Cons
+- Some models may have higher resource requirements.
+///
+
 /// example | How to use it in GPTStonks Chat CE
 Add the following to your env variables (by default in `.env.template`):
 ```bash title=".env.template"
@@ -104,15 +129,6 @@ LLM_HF_GPTQ_BITS=<NUMBER OF BITS IN QUANTIZATION>
 LLM_HF_DEVICE_MAP=auto
 ...
 ```
-///
-
-/// success | Pros
-- Hugging Face offers a vast repository of pre-trained models, catering to diverse requirements.
-- Benefits from a robust community with frequent updates.
-///
-
-/// danger | Cons
-- Some models may have higher resource requirements.
 ///
 
 ## External LLMs via APIs
@@ -134,16 +150,6 @@ Here are key points about the OpenAI API:
 
 6. **Ongoing Improvements:** OpenAI may release updates to their language models, and developers using the API can benefit from these improvements without having to retrain their own models.
 
-/// example | How to use it in GPTStonks Chat CE
-Add the following to your env variables (by default in `.env.template`):
-```bash title=".env.template"
-...
-LLM_MODEL_ID=openai:gpt-3.5-turbo-1106 # See https://platform.openai.com/docs/models
-OPENAI_API_KEY=<YOUR OPENAI API KEY>
-...
-```
-///
-
 /// success | Pros
 - Employs state-of-the-art pre-trained models, ensuring high accuracy.
 - Seamlessly integrates with OpenAI's ecosystem.
@@ -154,6 +160,16 @@ OPENAI_API_KEY=<YOUR OPENAI API KEY>
 - Consideration of usage costs, especially for large-scale applications.
 - Need for an account in OpenAI and an API key.
 - Closed source, so there is little information about the models' architectures.
+///
+
+/// example | How to use it in GPTStonks Chat CE
+Add the following to your env variables (by default in `.env.template`):
+```bash title=".env.template"
+...
+LLM_MODEL_ID=openai:gpt-3.5-turbo-1106 # See https://platform.openai.com/docs/models
+OPENAI_API_KEY=sk-...XXXX
+...
+```
 ///
 
 ### AWS Bedrock
@@ -178,18 +194,6 @@ Key features and capabilities of Amazon Bedrock include:
 
 8. **Billing and Pricing Models:** Amazon Bedrock offers billing based on processed input and output tokens, with different pricing models such as on-demand and provisioned throughput.
 
-/// example | How to use it in GPTStonks Chat CE
-Add the following to your env variables (by default in `.env.template`):
-```bash title=".env.template"
-...
-LLM_MODEL_ID=bedrock:anthropic.claude-instant-v1 # See https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids-arns.html
-AWS_ACCESS_KEY_ID=<YOUR AWS ACCESS KEY ID>
-AWS_SECRET_ACCESS_KEY=<YOUR AWS SECRET ACCESS KEY>
-AWS_DEFAULT_REGION=<AWS BEDROCK REGION TO USE>
-...
-```
-///
-
 /// success | Pros
 - Provides scalable infrastructure for handling large workloads.
 - Integration with other AWS services for enhanced functionality.
@@ -201,6 +205,18 @@ AWS_DEFAULT_REGION=<AWS BEDROCK REGION TO USE>
 - Involves a steeper learning curve for users unfamiliar with AWS services.
 - Need for an account in AWS and extra configuration.
 - Some of the best models (like [Anthropic](https://www.anthropic.com/)'s models) are closed source.
+///
+
+/// example | How to use it in GPTStonks Chat CE
+Add the following to your env variables (by default in `.env.template`):
+```bash title=".env.template"
+...
+LLM_MODEL_ID=bedrock:anthropic.claude-instant-v1 # See https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids-arns.html
+AWS_ACCESS_KEY_ID=<YOUR AWS ACCESS KEY ID>
+AWS_SECRET_ACCESS_KEY=<YOUR AWS SECRET ACCESS KEY>
+AWS_DEFAULT_REGION=<AWS BEDROCK REGION TO USE>
+...
+```
 ///
 
 ## Benchmark
