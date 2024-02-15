@@ -5,7 +5,8 @@ repo_name: GPTStonks Chat
 docs_dir: docs
 copyright: Copyright &copy; 2023 - 2024 Mitheithel, S.L.
 nav:
-  - Overview: index.md
+  - Home: index.md
+  - API Reference: https://docs.gptstonks.net/api/gptstonks_api/
   - Blog:
     - blog/index.md
 theme:
